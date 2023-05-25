@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'laravel'),
-    'logo'=> '/assets/media/project-logos/',
+    'logo'=> '/assets/media/project-logos/8.jpg',
 
     /*
     |--------------------------------------------------------------------------
