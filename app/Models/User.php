@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_type',
     ];
 
     /**
@@ -40,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function documents() {
+        return $this->hasMany(Document::class);
+    }
+
+    public function permissions() {
+        return $this->hasMany(Permission::class);
+    }
 }
