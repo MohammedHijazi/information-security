@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuth;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Admin\ContactUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +16,6 @@ use App\Http\Controllers\Admin\ContactUsController;
 */
 Route::get('/', [Controller::class,'home'])->name('home');
 Route::get('/optimize',[Controller::class,'optimize']);
-Route::post('/contactus',[ContactUsController::class,'store'])->name('contactus.store');
 
 ////////////////////////////// Admin Routes //////////////////////////
 Route::get('/admin/login',[AdminAuth::class,'login'])->name('admin.login')->middleware('isLogin');
@@ -35,6 +33,5 @@ Route::group(['middleware'=>'admin','prefix'=>'/admin/dashboard'],function (){
     Route::get('/setting',[AdminAuth::class,'setting'])->name('setting');
     Route::post('/setting/email',[AdminAuth::class,'setting_email'])->name('setting_email');
     Route::post('/setting/password',[AdminAuth::class,'setting_password'])->name('setting_password');
-    Route::resource('contactus', ContactUsController::class)->except('store');
 });
 

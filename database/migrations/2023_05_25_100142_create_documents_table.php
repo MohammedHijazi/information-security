@@ -19,6 +19,7 @@ class CreateDocumentsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('file_path');
+            $table->enum('security_level', ['top_secret', 'secret', 'confidential', 'unclassified'])->default('unclassified');
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class CreatePermissionsTable extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained()->onDelete("cascade");
             $table->foreignId("document_id")->constrained()->onDelete("cascade");
-            $table->enum("permission", ["read", "write", "delete","execute"])->default("read");
+            $table->enum("permission", ["read", "write", "delete","execute"]);
             $table->timestamps();
         });
     }
