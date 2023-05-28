@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->enum('user_type', ['user', 'administrator'])->default('user');
-            $table->enum('security_level', ['top_secret', 'secret', 'confidential', 'unclassified'])->default('unclassified');
+            $table->enum('security_level', ['top_secret', 'secret', 'confidential', 'unclassified'])->nullable();
 
         });
     }

@@ -47,6 +47,12 @@
                     <li class="menu-item {{\Route::currentRouteName() == 'admin.home' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('admin.home')}}" class="menu-link "><i
                                 class="menu-icon flaticon-home"></i><span class="menu-text">Dashboard</span></a>
                     </li>
+                    <li class="menu-item {{\Route::currentRouteName() == 'administrator.index' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('administrator.index')}}" class="menu-link "><i
+                                class="menu-icon flaticon2-group"></i><span class="menu-text">Administrators</span></a>
+                    </li>
+                    <li class="menu-item {{\Route::currentRouteName() == 'user.index' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('user.index')}}" class="menu-link "><i
+                                class="menu-icon flaticon-users"></i><span class="menu-text">Users</span></a>
+                    </li>
                     <li class="menu-item {{\Route::currentRouteName() == 'setting' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('setting')}}" class="menu-link "><i
                                 class="menu-icon flaticon-settings"></i><span class="menu-text">Setting</span></a>
                     </li>
