@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuth;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 
 /*
@@ -28,7 +30,8 @@ Route::post('/admin/update/{token}',[AdminAuth::class,'updatePassword'])->name('
 Route::group(['middleware'=>'admin','prefix'=>'/admin/dashboard'],function (){
     /// First admin word means middleware class and second admin word means guard type
     Route::view('/', 'admin.dashboard')->name('admin.home');
-
+    Route::resource('administrator',AdminController::class);
+    Route::resource('user',UserController::class);
     Route::post('/logout',[AdminAuth::class,'logout'])->name('logout');
     Route::get('/setting',[AdminAuth::class,'setting'])->name('setting');
     Route::post('/setting/email',[AdminAuth::class,'setting_email'])->name('setting_email');

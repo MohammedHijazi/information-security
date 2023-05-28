@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type',
+        'security_level',
     ];
 
     /**
@@ -48,5 +49,14 @@ class User extends Authenticatable
 
     public function permissions() {
         return $this->hasMany(Permission::class);
+    }
+
+    public function scopeAdminType($query)
+    {
+        return $query->where('user_type', 'administrator');
+    }
+    public function scopeUserType($query)
+    {
+        return $query->where('user_type', 'user');
     }
 }

@@ -30,7 +30,8 @@ class AdminAuth extends Controller
             'email' => 'required',
         ]);
         $rememberme = request('rememberme') == 1?true:false;
-        if (auth()->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
+        $admin= User::where('email', request('email'))->adminType()->first();
+        if ($admin && auth()->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
             return redirect(route('admin.home'));
         } else {
             session()->flash('error', 'Make sure the email or password is correct');
