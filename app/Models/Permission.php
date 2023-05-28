@@ -9,7 +9,7 @@ class Permission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'document_id', 'type'];
+    protected $fillable = ['user_id', 'document_id', 'permission'];
 
     public function user() {
         return $this->belongsTo(User::class);

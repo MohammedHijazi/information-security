@@ -9,7 +9,7 @@ class Document extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'description', 'file_path'];
+    protected $fillable = ['user_id', 'name', 'description', 'file_path','security_level'];
 
     public function user() {
         return $this->belongsTo(User::class);
