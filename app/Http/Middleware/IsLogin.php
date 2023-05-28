@@ -17,7 +17,7 @@ class IsLogin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            return redirect('/dashboard');
+            return redirect('admin/dashboard');
         }
         return $next($request);
     }
