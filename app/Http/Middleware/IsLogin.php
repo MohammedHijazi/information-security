@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use http\Client\Curl\User;
 use Illuminate\Support\Facades\Auth;
 
 class IsLogin
@@ -17,7 +18,12 @@ class IsLogin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            return redirect('admin/dashboard');
+            if (\auth()->user()->user_type == 'administrator'){
+                return redirect('admin/dashboard');
+            }
+            else{
+                return redirect('user/dashboard');
+            }
         }
         return $next($request);
     }

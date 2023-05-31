@@ -17,7 +17,6 @@ class CreateDocumentsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->text('content')->nullable();
             $table->string('file_path');
             $table->enum('security_level', ['top_secret', 'secret', 'confidential', 'unclassified'])->default('unclassified');
             $table->timestamps();
