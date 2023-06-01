@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class DocumentController extends Controller
 {
     protected $path= 'user.document';
+
     public function index()
     {
         $doc_ids= Permission::where(['user_id'=> auth()->id(), 'permission'=> 'read'])->pluck('document_id');
@@ -58,10 +59,16 @@ class DocumentController extends Controller
     public function edit($id)
     {
         $document= Document::whereId($id)->first();
-        if($document->user_id == \auth()->id()){
-            return view($this->path.'.form_page',compact('document'));
+        if (!havePermission($document, 'write')){
+            return  abort(403, 'You don\'t have permission to access this resource.');
         }
-        return "You don't have permission for this action";
+        return view($this->path.'.form_page',compact('document'));
+    }
+    public function show(Document $document){
+        if (!havePermission($document, 'read')){
+            return  abort(403, 'You don\'t have permission to access this resource.');
+        }
+        return view($this->path.'.read',compact('document'));
     }
     public function update(Request $request, $id)
     {
@@ -78,8 +85,8 @@ class DocumentController extends Controller
         }
         try {
             $document= Document::whereId($id)->first();
-            if(!($document->user_id == auth()->id())){
-                return "You don't have permission for this action";
+            if (!havePermission($document, 'write')){
+                return  abort(403, 'You don\'t have permission to access this resource.');
             }
             $document->update([
                 'name'=> $request->name,
@@ -99,6 +106,9 @@ class DocumentController extends Controller
         try {
 
             $document= Document::whereId($id)->first();
+            if (!havePermission($document, 'delete')){
+                return  abort(403, 'You don\'t have permission to access this resource.');
+            }
             if (Storage::disk("public")->exists($document->file_path)){
                 Storage::disk("public")->delete($document->file_path);
             }
@@ -115,14 +125,19 @@ class DocumentController extends Controller
 
     public function permission_form($document_id){
         $document= Document::whereId($document_id)->first();
+        if (!havePermission($document, 'delete')){
+                return  abort(403, 'You don\'t have permission to access this resource.');
+            }
         $users= User::where('user_type','user')->where('id', '!=', $document->user_id)->where('security_level', $document->security_level)->get();
-        if(!($document->user_id == auth()->id())){
-            return "You don't have permission for this action";
-        }
+
         return view($this->path.'.permission_form',compact('users','document'));
     }
 
     public function permission_post(Request $request,$document_id){
+        $document= Document::whereId($document_id)->first();
+        if ($document->user_id != auth()->id()){
+            return  abort(403, 'You don\'t have permission to access this resource.');
+        }
         $validation= Validator::make(
             $request->all(),[
             'user'=>'required|numeric',

@@ -1,9 +1,12 @@
 <?php
 
 if (!function_exists('havePermission')) {
-    function havePermission($document_id,$permission)
+    function havePermission($document,$permission)
     {
-        return !is_null(\App\Models\Permission::where(['document_id'=> $document_id, 'permission'=> $permission, 'user_id'=> auth()->id()])->first());
+        if ($document->user_id == auth()->id()){
+            return true;
+        }
+        return !is_null(\App\Models\Permission::where(['document_id'=> $document->id, 'permission'=> $permission, 'user_id'=> auth()->id()])->first());
     }
 }
 ?>
