@@ -34,10 +34,10 @@ Route::group(['middleware'=>'admin','prefix'=>'/admin/dashboard'],function (){
     Route::view('/', 'admin.dashboard')->name('admin.home');
     Route::resource('administrator',AdminController::class);
     Route::resource('user',UserController::class);
-    Route::post('/logout',[AdminAuth::class,'logout'])->name('logout');
-    Route::get('/setting',[AdminAuth::class,'setting'])->name('setting');
-    Route::post('/setting/email',[AdminAuth::class,'setting_email'])->name('setting_email');
-    Route::post('/setting/password',[AdminAuth::class,'setting_password'])->name('setting_password');
+    Route::post('/logout',[AdminAuth::class,'logout'])->name('admin.logout');
+    Route::get('/setting',[AdminAuth::class,'setting'])->name('admin.setting');
+    Route::post('/setting/email',[AdminAuth::class,'setting_email'])->name('admin.setting_email');
+    Route::post('/setting/password',[AdminAuth::class,'setting_password'])->name('admin.setting_password');
 });
 
 ////////////////////////////// User Routes //////////////////////////
@@ -55,10 +55,10 @@ Route::group(['middleware'=>'user','prefix'=>'/user/dashboard'],function (){
     Route::post('/document/permission/{document_id}', [DocumentController::class,'permission_post'])->name('document.permission_post');
     Route::resource('document', DocumentController::class);
 
-    Route::post('/logout',[UserAuth::class,'logout'])->name('logout');
-    Route::get('/setting',[UserAuth::class,'setting'])->name('setting');
-    Route::post('/setting/email',[UserAuth::class,'setting_email'])->name('setting_email');
-    Route::post('/setting/password',[UserAuth::class,'setting_password'])->name('setting_password');
+    Route::post('/logout',[UserAuth::class,'logout'])->name('user.logout');
+    Route::get('/setting',[UserAuth::class,'setting'])->name('user.setting');
+    Route::post('/setting/email',[UserAuth::class,'setting_email'])->name('user.setting_email');
+    Route::post('/setting/password',[UserAuth::class,'setting_password'])->name('user.setting_password');
 });
 
 

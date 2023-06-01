@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,8 @@ class DocumentController extends Controller
     protected $path= 'user.document';
     public function index()
     {
-        $documents= Document::orderByDesc('created_at')->where('user_id', \auth()->id())->get();
+        $doc_ids= Permission::where(['user_id'=> auth()->id(), 'permission'=> 'read'])->pluck('document_id');
+        $documents= Document::orderByDesc('created_at')->where('user_id', \auth()->id())->orWhereIn('id', $doc_ids)->get();
         return view($this->path.'.index',compact('documents'));
     }
     public function create()
@@ -113,7 +115,7 @@ class DocumentController extends Controller
 
     public function permission_form($document_id){
         $document= Document::whereId($document_id)->first();
-        $users= User::where('user_type','user')->where('security_level', $document->security_level)->get();
+        $users= User::where('user_type','user')->where('id', '!=', $document->user_id)->where('security_level', $document->security_level)->get();
         if(!($document->user_id == auth()->id())){
             return "You don't have permission for this action";
         }
@@ -123,7 +125,7 @@ class DocumentController extends Controller
     public function permission_post(Request $request,$document_id){
         $validation= Validator::make(
             $request->all(),[
-            'user_id'=>'required|numeric',
+            'user'=>'required|numeric',
             'permission'=>'array|min:1',
         ],[],[]
         );
@@ -131,8 +133,15 @@ class DocumentController extends Controller
         if ($validation->fails()){
             return redirect()->back()->withErrors($validation->errors());
         }
-        dd($request->all(),$request->permission, $document_id);
-
+        Permission::where(['user_id'=> $request->user, 'document_id'=> $document_id])->delete();
+        foreach ($request->permission as $permission){
+            Permission::create(
+                [
+                    'user_id'=> $request->user,
+                    'permission'=> $permission,
+                    'document_id'=> $document_id
+                ]);
+        }
         return redirect()->route('document.index')->with(['success'=>'Add permissions Successfully']);
     }
 }

@@ -79,10 +79,10 @@
                                         <div class="col-10">
                                             <div class="dropdown bootstrap-select show-tick form-control show dropup">
                                                 <select class="form-control selectpicker" name="permission[]" multiple>
-                                                    <option value="view">view</option>
-                                                    <option value="create">create</option>
+                                                    <option value="read">read</option>
+                                                    <option value="write">write</option>
                                                     <option value="delete">delete</option>
-                                                    <option value="readWrite">read & write</option>
+                                                    <option value="execute">execute</option>
                                                 </select>
                                             </div>
                                         </div>

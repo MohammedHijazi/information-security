@@ -85,7 +85,8 @@
                                             <td>{{$document->name}}</td>
                                            <td><b>{{strtoupper($document->security_level)}}</b></td>
                                             <td>
-                                                <a href="{{route('document.permission',[$document->id])}}" class="btn btn-outline-success">
+                                                @if($document->user_id == auth()->id())
+                                                    <a href="{{route('document.permission',[$document->id])}}" class="btn btn-outline-success">
                                                 <span class="svg-icon svg-icon-success svg-icon-1x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Design\Edit.svg--><svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
@@ -101,8 +102,9 @@
                                                                   height="2" rx="1"/>
                                                         </g>
                                                     </svg></span>
-                                                    Permissions
-                                                </a>
+                                                        Permissions
+                                                    </a>
+                                                @endif
                                                 <a href="{{route('document.edit',[$document->id])}}" class="btn btn-outline-primary">
                                                 <span class="svg-icon svg-icon-primary svg-icon-1x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Design\Edit.svg--><svg
                                                         xmlns="http://www.w3.org/2000/svg"
