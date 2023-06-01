@@ -153,8 +153,8 @@
                                                         </form>
                                                 @endif
                                                 @if(havePermission($document, 'execute'))
-                                                    <a href="{{asset('/storage/'.$document->file_path)}}" class="btn btn-outline-primary">
-                                                    <span class="svg-icon svg-icon-primary svg-icon-1x">
+                                                    <a href="{{asset('/storage/'.$document->file_path)}}" target="_blank" class="btn btn-outline-dark">
+                                                    <span class="svg-icon svg-icon-dark svg-icon-1x">
                                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                 <polygon points="0 0 24 0 24 24 0 24"/>
