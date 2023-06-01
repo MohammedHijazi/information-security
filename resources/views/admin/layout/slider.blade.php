@@ -53,11 +53,11 @@
                     <li class="menu-item {{\Route::currentRouteName() == 'user.index' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('user.index')}}" class="menu-link "><i
                                 class="menu-icon flaticon-users"></i><span class="menu-text">Users</span></a>
                     </li>
-                    <li class="menu-item {{\Route::currentRouteName() == 'setting' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('setting')}}" class="menu-link "><i
+                    <li class="menu-item {{\Route::currentRouteName() == 'admin.setting' ?'menu-item-active':''}}" aria-haspopup="true"><a href="{{route('admin.setting')}}" class="menu-link "><i
                                 class="menu-icon flaticon-settings"></i><span class="menu-text">Setting</span></a>
                     </li>
                     <li class="menu-item " aria-haspopup="true">
-                        <form id="logoutForm" action="{{route('logout')}}" method="post" style="margin-left: 25px" class="mt-3">
+                        <form id="logoutForm" action="{{route('admin.logout')}}" method="post" style="margin-left: 25px" class="mt-3">
                             @csrf
                             <a href="#" onclick="logout()" >
                                 <i class="text-danger fas fa-power-off"></i>

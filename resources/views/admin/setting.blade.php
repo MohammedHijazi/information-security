@@ -23,7 +23,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{route('setting')}}" class="text-muted">
+                                <a href="{{route('admin.setting')}}" class="text-muted">
                                     Settings
                                 </a>
                             </li>
@@ -54,7 +54,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                <form method="post" class="col-md-6" action="{{route('setting_password')}}">
+                <form method="post" class="col-md-6" action="{{route('admin.setting_password')}}">
                     @csrf
                     <div class="card card-custom mb-3">
                         <div class="card-header">
@@ -118,7 +118,7 @@
                         <!--end::Section 1 Form-->
                     </div>
                 </form>
-                <form method="post" class="col-md-6" action="{{route('setting_email')}}">
+                <form method="post" class="col-md-6" action="{{route('admin.setting_email')}}">
                     @csrf
                     <div class="card card-custom mb-3">
                         <div class="card-header">
