@@ -63,30 +63,5 @@
     </div>
 @endsection
 @push('js')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        function confirmDeleted(id){
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
 
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure ?!',
-                text: "You are delete the document",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, Delete it',
-                cancelButtonText: 'No, cancel',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('.deleteForm'+id).submit();
-                }
-            })
-        }
-    </script>
 @endpush
